@@ -17,3 +17,7 @@ print(arr4)
 #평균이 0이고, 표준편차가 1인 표준 정규를 띄운 배열
 arr5 = np.random.normal(0,1,(3,3))
 print(arr5)
+
+#평균이 0이고, 표준편차가 1인 표준 정규를 띄운 배열
+arr5 = np.random.normal(0,1,(3,3))
+print(arr5)
