@@ -1,0 +1,26 @@
+3주차 수업 (230330)
+
+인간의 뉴런을 모방한 것이 인공 뉴런
+파블로프의 개 실험이 대표적인 예
+학습을 통해서 종을 쳤을 때 침을 흘림
+청각 신경이 신호가 약했다가 강해짐
+
+perceptron : 인공지능의 기본 단위
+ㄴactivation function이 매우 중요
+
+training nueural network
+최적의 weight를 찾는 방벙 : 
+- loss function을 줄이도록 weight를 바꿈
+loss function에서의 미분 , gradient descent => 공부해오기
+
+forword propagation & back propagation
+
+공부 및 코딩 해오기
+미분 & 손실 힘수 (먼저!!!)
+
+gradient descent (이해도 ) & back propagation (이해하고 집중, 중요!)
+
+숙제
+gradient descent 코딩 & 구현
+
+back propagation 설명 & 코딩 & 구현
