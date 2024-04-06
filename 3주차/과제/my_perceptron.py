@@ -33,6 +33,7 @@ data_point = 100
 epoch = 10
 training_set = gen_training_data(data_point)
 # print(training_set[0:5])
+# figure 그리기
 plt.figure(0)
 plt.ylim(-0.1, 1.1)
 plt.xlim(-0.1, 1.1)
