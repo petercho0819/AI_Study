@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 
 
 X = np.random.rand(100)
+# X2 = np.random.rand(100)
 print(X)
 # 임의의 f(x) 정의
 # y = wx + b <= 1차 방정식
@@ -22,10 +23,11 @@ def plot_prediction(pred,y) :
     plt.show()
 
 ## gradient Descent 구현
-#.  -1 ~ 1까지  랜덤 수
 # 업데이트 할 W : Learning Rate * ((Y예측 - Y실제) * X) 평균
 # 업데이트 할 b : Learning Rate * ((Y예측 - Y실제) * 1) 평균
+#.  -1 ~ 1까지  랜덤 수
 W = np.random.uniform(-1, 1)
+# W2 = np.random.uniform(-1, 1)
 b = np.random.uniform(-1, 1)
 print(W) 
 print(b)
@@ -42,11 +44,13 @@ for epoch in range(200):
 
     # gradient descent 계산
     w_grad = learning_rate * ((Y_Pred - Y) * X).mean()
+    # w_grad_2 = learning_rate * ((Y_Pred - Y) * X2).mean()
     b_grad = learning_rate * ((Y_Pred - Y) * 1).mean()
 
     # W, b 값 갱신
     # !질문 : 왜 다시 갱신을 해줄까
     W = W - w_grad
+    # W = W2 - w_grad_2
     b = b - b_grad
 
     if epoch % 10 == 0:
