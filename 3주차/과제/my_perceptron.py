@@ -87,6 +87,7 @@ for i in range(epoch):
                 plt.plot(xs[0], xs[1], 'go')
         
         yy = -w[1]/w[0] * xx + thres /w[0] # <== w[0] * yy + w[1] * xx = thres
+        # plot 그리기
         plt.plot(xx, yy)
         plt.show()
         cnt = cnt+ 1
