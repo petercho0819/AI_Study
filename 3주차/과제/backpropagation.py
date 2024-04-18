@@ -28,7 +28,7 @@ class MLP:
     # 평균 loss 계산
     def mse_loss(self, y_true,  y_pred):
         return np.mean((y_true - y_pred) ** 2)
-    
+    # backward 계산
     def backward(self, x, y, y_pred, learning_rate):
         dc_do1 = -2 * (y - y_pred)
         do1_dz3 = y_pred * (1 - y_pred)
