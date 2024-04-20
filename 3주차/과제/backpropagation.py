@@ -17,6 +17,7 @@ class MLP:
     def sigmoid(self, x):
         return 1 / (1 + np.exp(-x))
 
+    # 순전파
     def forward(self, x):
 
         self.z1_2 = np.dot(x, self.w1_2_3_4)
@@ -25,11 +26,13 @@ class MLP:
         self.o = self.sigmoid(self.z3)
         return self.o
     
-    # 평균 loss 계산
+    # MSE 손실 계산
     def mse_loss(self, y_true,  y_pred):
         return np.mean((y_true - y_pred) ** 2)
+    
     # backward 계산
     def backward(self, x, y, y_pred, learning_rate):
+        # chain rule 계산
         dc_do1 = -2 * (y - y_pred)
         do1_dz3 = y_pred * (1 - y_pred)
         dz3_dw5_6 = self.h
@@ -47,3 +50,24 @@ class MLP:
                 self.backward([X_train[i]], [y_train[i]], y_pred, learning_rate)
                 if np.mod(epoch, 100) ==0:
                     print('epoch = ', epoch, 'loss = ', loss)
+
+x_train = np.random.randint(0,2,(100,2))
+y_train = (x_train[:,0]!=x_train[:,1].astype(int))
+mlp = MLP(input_size=2, hidden_size=2, output_size=1)
+mlp.train(x_train, y_train, epochs=1000, learning_rate=0.1)
+
+test_input = np.array([[0,0]])
+predicted_output = mlp.forward(test_input)
+print("predicted_output : ", test_input, predicted_output)
+
+test_input = np.array([[1,0]])
+predicted_output = mlp.forward(test_input)
+print("predicted_output : ", test_input, predicted_output)
+
+test_input = np.array([[0,1]])
+predicted_output = mlp.forward(test_input)
+print("predicted_output : ", test_input, predicted_output)
+
+test_input = np.array([[1,1]])
+predicted_output = mlp.forward(test_input)
+print("predicted_output : ", test_input, predicted_output)
