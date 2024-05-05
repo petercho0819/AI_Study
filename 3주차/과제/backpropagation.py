@@ -8,6 +8,7 @@ class MLP:
         self.output_size = output_size
 
         # 가중치 초기화
+        # 보통은 랜덤하게 선언할 수 있지만 이번 예제의 경우는 원할한 학습 과정을 위해서 초기값을 fix
         # self.w1_2_3_4 = np.random.random((self.input_size, self.hidden_size))
         self.w1_2_3_4 = [[1,10],[1,10]]
 
@@ -18,12 +19,13 @@ class MLP:
         return 1 / (1 + np.exp(-x))
 
     # 순전파
+    # x : 입력값이라고 볼 수 있음
     def forward(self, x):
 
-        self.z1_2 = np.dot(x, self.w1_2_3_4)
-        self.h = self.sigmoid(self.z1_2)
-        self.z3 = np.dot(self.h, self.w5_6)
-        self.o = self.sigmoid(self.z3)
+        self.z1_2 = np.dot(x, self.w1_2_3_4)    # 1 x 2
+        self.h = self.sigmoid(self.z1_2)        # 1 x 2
+        self.z3 = np.dot(self.h, self.w5_6)     # 1 x 1
+        self.o = self.sigmoid(self.z3)          # 1 x 1
         return self.o
     
     # MSE 손실 계산
@@ -36,10 +38,14 @@ class MLP:
         dc_do1 = -2 * (y - y_pred)
         do1_dz3 = y_pred * (1 - y_pred)
         dz3_dw5_6 = self.h
-        dc_dw5_6 = dc_do1 * do1_dz3 * dz3_dw5_6
-        self.w5_6 = self.w5_6 + learning_rate * -dc_dw5_6.T
+        # 각 층별로 계산
+        # w5, w6에 대한 값
+        dc_dw5_6 = dc_do1 * do1_dz3 * dz3_dw5_6     # 1 x 2
+        # w5, w6에 대한 새로운 가중치 값                  # 2 x 1
+        self.w5_6 = self.w5_6 + learning_rate * -dc_dw5_6.T #T는 차원을 맞추기 위해서 전치(transpose)
+        # w1, 2, 3, 4에 대한 값
         dc_dw1_2_3_4 = dc_do1 * do1_dz3 * np.dot(self.w5_6 * (self.h * (1- self.h)).T, x)
-
+        # w1, 2, 3, 4에 대한 새로운 가중치 값 
         self.w1_2_3_4 = self.w1_2_3_4 + learning_rate * -dc_dw1_2_3_4.T
 
     def train (self, X_train, y_train, epochs, learning_rate):
